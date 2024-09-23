@@ -7,7 +7,11 @@
 int main(int argc, char **argv) {
 	if (argc < 2)
 	{
-		std::cout << "\nncc compiler v. wip\n";
+		std::cout
+			<< '\n' << ansi::colour::fg::bright::yellow
+			<< "ncc compiler v. wip"
+			<< '\n' << ansi::colour::fg::reset;
+
 		return EXIT_SUCCESS;
 	}
 

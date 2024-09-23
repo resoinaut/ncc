@@ -8,8 +8,8 @@
 
 // note: these definitions are un-defined at the end of the file
 
-#define error_colour ansi::colour::red
-#define reset_colour ansi::colour::reset
+#define error_colour ansi::colour::fg::red
+#define reset_colour ansi::colour::fg::reset
 
 namespace report
 {
