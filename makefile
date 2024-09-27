@@ -1,2 +1,2 @@
 all:
-	g++ --std=c++20 main.cc
+	g++ -o ncc.exe --std=c++20 *.cc lexer/*.cc utilities/*.cc

@@ -1,0 +1,6 @@
+Temporary file for saving notes / ideas.
+
+* Make sure to include RVO and elision.
+* Warn for #pragma once in source file.
+* Warn for misleading indentation.
+* Warn for circular includes or includes with self

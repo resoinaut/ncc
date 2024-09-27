@@ -5,3 +5,7 @@
 # files
 
 *.exe
+
+# used for testing
+
+app
