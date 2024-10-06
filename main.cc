@@ -9,6 +9,7 @@
 #include "lexer/token.hh"
 #include "lexer/tokenize.hh"
 
+#include "utilities/fmt.hh"
 #include "utilities/ansi.hh"
 #include "utilities/error.hh"
 #include "utilities/options.hh"
@@ -32,10 +33,13 @@ int main(int argc, char **argv)
 
 	if ((*filenames).size() > 1)
 	{
-		Error error;
+		std::unordered_set<int> indices;
 
-		error.change_error("expected 1 source file and encountered {}", (*filenames).size());
-		error.stderr_print();
+		for (int i = 1; i < argc; i++)
+			indices.insert(i);
+
+		fmt::Error("expected 1 source file and encountered {}", argc - 1)
+			.shell(argc, argv, indices);
 
 		return EXIT_FAILURE;
 	}

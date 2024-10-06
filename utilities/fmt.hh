@@ -10,7 +10,8 @@ namespace fmt
 	public:
 		// constructors
 
-		Error(std::string_view error);
+		template<typename ...T>
+		Error(std::string_view error, const T &...args);
 
 		// member functions
 
@@ -18,3 +19,5 @@ namespace fmt
 		Error shell(int argc, char *argv[], const std::unordered_set<int> &indices_to_mark) const;
 	};
 }
+
+#include "fmt.tcc"

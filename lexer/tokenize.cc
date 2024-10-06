@@ -6,7 +6,7 @@
 
 #include "token.hh"
 #include "tokenize.hh"
-#include "../utilities/report.hh"
+#include "../utilities/fmt.hh"
 
 std::optional<std::vector<lexer::Token>> lexer::tokenize(std::string_view source)
 {
@@ -74,7 +74,7 @@ std::optional<std::vector<lexer::Token>> lexer::tokenize(std::string_view source
 
 		// invalid character
 
-		report::error("encountered invalid character '{}'", curr);
+		fmt::Error("encountered invalid character '{}'", curr);
 
 		return std::nullopt;
 	}

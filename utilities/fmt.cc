@@ -2,20 +2,9 @@
 #include <cstddef>       // std::size_t
 #include <cstring>       // std::strlen
 #include <iostream>      // std::cerr
-#include <string_view>   // std::string_view
 #include <unordered_set> // std::unordered_set
 
 #include "fmt.hh"
-#include "ansi.hh"
-
-fmt::Error::Error(std::string_view error)
-{
-	std::cerr
-		<< '\n'
-		<< ansi::colour::fg::red << "error: " << ansi::colour::fg::reset
-		<< error
-		<< '\n';
-}
 
 fmt::Error fmt::Error::shell(int argc, char *argv[], const std::unordered_set<int> &indices_to_mark) const
 {
@@ -26,13 +15,8 @@ fmt::Error fmt::Error::shell(int argc, char *argv[], const std::unordered_set<in
 	// *       ^^^^^^^^^^     ^^^^^^^^^^
 	// *
 
-	std::cerr << "$      ";
-
-	// index contains the position in the command-line
-	// marks contains the markings of '^' to be output later
-
-	std::size_t index {};
-	std::string marks {};
+	std::string shell = "$      ";
+	std::string marks;
 
 	for (int i = 0; i < argc; i++)
 	{
@@ -40,15 +24,17 @@ fmt::Error fmt::Error::shell(int argc, char *argv[], const std::unordered_set<in
 
 		if (indices_to_mark.contains(i))
 		{
-			marks += std::string(marks.length() - index, ' ');
+			marks += std::string(shell.length() - marks.length(), ' ');
 			marks += std::string(length, '^');
 		}
 
-		std::cerr << ' ' << argv[i];
-		index += length;
+		shell += argv[i];
+		shell += ' ';
 	}
 
-	std::cerr << marks << '\n';
+	shell.pop_back(); // remove trailing space
+
+	std::cerr << '\n' << shell << '\n' << marks << '\n';
 
 	return *this;
 }
